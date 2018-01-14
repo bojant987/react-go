@@ -12,84 +12,82 @@ import Login from './Components/Auth/Login';
 import Profile from './Components/Profile/Profile';
 
 class _Routes extends React.Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.withLoginRedirect = ::this.withLoginRedirect;
-        this.withAdminAccess = ::this.withAdminAccess;
-    }
+		this.withLoginRedirect = ::this.withLoginRedirect;
+		this.withAdminAccess = ::this.withAdminAccess;
+	}
 
-    static defaultProps = {
-        user: { admin: true } // delete this thing when real auth is implemented
-    };
+	static defaultProps = {
+		user: { admin: true }, // auth mock, delete if not needed
+	};
 
-    withLoginRedirect(Component, user) {
-        if (user) {
-            return <Component />
-        } else {
-            return <Redirect to='/login' />
-        }
-    }
+	withLoginRedirect(Component, user) {
+		// auth mock, delete if not needed
+		if (user) {
+			return <Component />;
+		} else {
+			return <Redirect to="/login" />;
+		}
+	}
 
-    withAdminAccess(Component, user) {
-        if (user && user.admin) {
-            return <Component />
-        } else {
-            return <Redirect to='/forbidden' />
-        }
-    }
+	withAdminAccess(Component, user) {
+		// auth mock, delete if not needed
+		if (user && user.admin) {
+			return <Component />;
+		} else {
+			return <Redirect to="/forbidden" />;
+		}
+	}
 
-    render() {
-        return (
-            <div>
-                <HashRouter>
-                    <Switch>
-                        {/*User login */}
-                        <Route path="/login" component={Login} />
+	render() {
+		return (
+			<div>
+				<HashRouter>
+					<Switch>
+						{/*User login */}
+						<Route path="/login" component={Login} />
 
-                        {/* Home */}
-                        <Route exact path="/">
-                            <div>
-                                <AppHeader/>
-                                <main>
-                                    {this.withLoginRedirect(Home, this.props.user)}
-                                </main>
-                                <AppFooter/>
-                            </div>
-                        </Route>
+						{/* Home */}
+						<Route exact path="/">
+							<div>
+								<AppHeader />
+								<main>{this.withLoginRedirect(Home, this.props.user)}</main>
+								<AppFooter />
+							</div>
+						</Route>
 
-                        {/* Profile */}
-                        <Route path="/profile/:user?">
-                            <div>
-                                <AppHeader/>
-                                <main>
-                                    {this.withLoginRedirect(Profile, this.props.user)}
-                                </main>
-                                <AppFooter/>
-                            </div>
-                        </Route>
-
-                    </Switch>
-                </HashRouter>
-            </div>
-        );
-    }
+						{/* Profile */}
+						<Route path="/profile/:user?">
+							<div>
+								<AppHeader />
+								<main>{this.withLoginRedirect(Profile, this.props.user)}</main>
+								<AppFooter />
+							</div>
+						</Route>
+					</Switch>
+				</HashRouter>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-    return { // example
-        loginStatus: state.loginStatus,
-        user: state.user,
-    };
+	return {
+		// example
+		loginStatus: state.loginStatus,
+		user: state.user,
+	};
 };
 
 const mapDispatchToProps = dispatch => {
-    return { // example
-        getUserPrefs: () => {
-            return dispatch(getUserPrefs());
-        },
-    };
+	return {
+		// example
+		getUserPrefs: () => {
+			return dispatch(getUserPrefs());
+		},
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(_Routes);
-
