@@ -20,16 +20,8 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-				test: /\.png$/,
-				loader: 'url-loader?limit=100000&mimetype=image/png',
-			},
-			{
-				test: /\.jpg$/,
-				loader: 'url-loader?limit=100000&mimetype=image/jpg',
-			},
-			{
-				test: /\.svg$/,
-				loader: 'url-loader?limit=100000&mimetype=image/svg',
+				test: /\.png$|.jpg$|.svg$|.jpeg$/,
+				loader: 'file-loader',
 			},
 		],
 	},
