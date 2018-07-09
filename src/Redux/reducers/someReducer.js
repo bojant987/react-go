@@ -1,3 +1,3 @@
-export default function someReducer(state = null, action) {
-    return state;
+export default function someReducer(state = null) {
+	return state;
 }

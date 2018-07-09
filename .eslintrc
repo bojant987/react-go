@@ -3,21 +3,30 @@
     "browser": true,
     "amd": true,
     "es6": true,
-    "mocha": true
   },
   "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "rules": {
+    "arrow-parens": 0,
+    "no-nested-ternary": 0,
+    "radix": 0,
+    "react/forbid-prop-types": 0,
     "no-console": 1,
     "no-debugger": 1,
-    "no-alert": 1,
-    "react/prop-types": 2,
-    "react/no-direct-mutation-state": 2,
-    "react/no-deprecated": 2,
-    "react/prefer-es6-class": 2
+    "func-style": 2,
+    "import/no-extraneous-dependencies": [2, {"devDependencies": true}],
+    "no-alert": 2,
+    "react/no-multi-comp": 2,
+    "react/prop-types": [2, { "ignore": ["location", "history", "children"] }],
+    "react/require-default-props": 2
   },
-  "plugins": [
-    "react"
-  ],
   "globals": {
     "expect": true
   }

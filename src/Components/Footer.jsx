@@ -1,11 +1,6 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 
-export default class Footer extends React.Component {
-    render() {
-        return (
-            <div>
-                Footer
-            </div>
-        );
-    }
-}
+const Footer = () => <div className="Footer">Footer</div>;
+
+export default Footer;

@@ -37,7 +37,7 @@ const scssLoader = [cssLoader, resolveUrlLoader, sassLoader];
 
 module.exports = merge(baseConfig, {
 	entry: {
-		bundle: './src/index.js',
+		bundle: './src/index.jsx',
 		vendor: VENDOR_LIBS,
 	},
 	output: {
@@ -64,7 +64,7 @@ module.exports = merge(baseConfig, {
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('production'),
+			'process.env.NODE_ENV': JSON.stringify('development'),
 		}),
 	],
 });

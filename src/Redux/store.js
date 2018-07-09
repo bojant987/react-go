@@ -5,11 +5,9 @@ import rootReducer from './rootReducer.js';
 
 const middlewares = [thunkMiddleware];
 
-let composeEnhancers = compose;
-
-composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'STORE' })
-    : compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+	? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'STORE' })
+	: compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
 

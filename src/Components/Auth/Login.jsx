@@ -1,11 +1,6 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 
-export default class Login extends React.Component {
-    render() {
-        return (
-            <div>
-                Login
-            </div>
-        );
-    }
-}
+const Login = () => <div className="Login">Login</div>;
+
+export default Login;
