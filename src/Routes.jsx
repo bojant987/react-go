@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { IndexRoute, withRouter, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import AppHeader from './Components/Header';
@@ -17,9 +17,8 @@ class _Routes extends React.Component {
 		// auth mock, delete if not needed
 		if (user) {
 			return <Component />;
-		} else {
-			return <Redirect to="/login" />;
 		}
+		return <Redirect to="/login" />;
 	}
 
 	static propTypes = {
@@ -40,18 +39,20 @@ class _Routes extends React.Component {
 	// }
 
 	render() {
+		const { user } = this.props;
+
 		return (
 			<div>
 				<HashRouter>
 					<Switch>
-						{/*User login */}
+						{/* User login */}
 						<Route path="/login" component={Login} />
 
 						{/* Home */}
 						<Route exact path="/">
 							<div>
 								<AppHeader />
-								<main>{_Routes.withLoginRedirect(Home, this.props.user)}</main>
+								<main>{_Routes.withLoginRedirect(Home, user)}</main>
 								<AppFooter />
 							</div>
 						</Route>
@@ -60,7 +61,7 @@ class _Routes extends React.Component {
 						<Route path="/profile/:user?">
 							<div>
 								<AppHeader />
-								<main>{_Routes.withLoginRedirect(Profile, this.props.user)}</main>
+								<main>{_Routes.withLoginRedirect(Profile, user)}</main>
 								<AppFooter />
 							</div>
 						</Route>
@@ -71,22 +72,16 @@ class _Routes extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		// example
-		loginStatus: state.loginStatus,
-		user: state.user,
-	};
-};
+const mapStateToProps = state => ({
+	// example
+	loginStatus: state.loginStatus,
+	user: state.user,
+});
 
-const mapDispatchToProps = dispatch => {
-	return {
-		// example
-		getUserPrefs: () => {
-			return dispatch(getUserPrefs());
-		},
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	// example
+	getUserPrefs: () => dispatch({ type: 'SOME_ACTION' }),
+});
 
 export default connect(
 	mapStateToProps,

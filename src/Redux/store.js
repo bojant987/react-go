@@ -1,7 +1,8 @@
+/* eslint no-underscore-dangle: 0 */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import rootReducer from './rootReducer.js';
+import rootReducer from './rootReducer';
 
 const middlewares = [thunkMiddleware];
 
