@@ -4,6 +4,7 @@ Simple React boilerplate to start you up.
 
 Includes:
 * redux, redux-thunk, react-router
+* smoking hot reloading
 * sass support
 * simple express server to serve project
 * webpack config for dev and prod
