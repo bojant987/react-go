@@ -6,7 +6,7 @@ Includes:
 * redux, redux-thunk, react-router
 * smoking hot reloading
 * sass support
-* simple express server to serve project
+* simple express server to serve the project
 * webpack config for dev and prod
 * Jest for testing
 * modified airbnb eslint for linting, which you can easily remove/edit if you don't like it
