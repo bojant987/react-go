@@ -38,4 +38,6 @@ Simple function that wraps axios API calls and takes action creators to dispatch
 This can be extended with custom auth stuff, like headers, so you don't have to specify them with every API call you make.
 You can use it or delete it.
 
+## TODO
+Switch webpack to v4.
 
