@@ -11,6 +11,7 @@ const cssLoader = {
 	loader: 'css-loader',
 	options: {
 		sourceMap: false,
+		url: false,
 	},
 };
 
@@ -25,15 +26,13 @@ const resolveUrlLoader = {
 const sassLoader = {
 	loader: 'sass-loader',
 	options: {
-		// outputStyle: 'compressed',
-		// sourceMap: false,
 		outputStyle: 'expanded',
 		sourceMap: true,
 		sourceMapContents: true,
 	},
 };
 
-const scssLoader = [cssLoader, resolveUrlLoader, sassLoader];
+const scssLoader = [cssLoader, 'postcss-loader', resolveUrlLoader, sassLoader];
 
 module.exports = merge(baseConfig, {
 	entry: {
@@ -65,6 +64,9 @@ module.exports = merge(baseConfig, {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('development'),
+		}),
+		new webpack.SourceMapDevToolPlugin({
+			test: /\.js$|.jsx$/,
 		}),
 	],
 });

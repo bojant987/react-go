@@ -12,6 +12,7 @@ const cssLoader = {
 	loader: 'css-loader',
 	options: {
 		sourceMap: false,
+		url: false,
 	},
 };
 
@@ -31,7 +32,7 @@ const sassLoader = {
 	},
 };
 
-const scssLoader = [cssLoader, resolveUrlLoader, sassLoader];
+const scssLoader = [cssLoader, 'postcss-loader', resolveUrlLoader, sassLoader];
 
 module.exports = merge(baseConfig, {
 	entry: {

@@ -17,7 +17,7 @@ module.exports = {
 				use: ['babel-loader', 'eslint-loader'],
 			},
 			{
-				test: /\.png$|.jpg$|.svg$|.jpeg$/,
+				test: /\.png$|.jpg$|.svg$|.jpeg$|.ico$/,
 				loader: 'file-loader',
 			},
 		],
