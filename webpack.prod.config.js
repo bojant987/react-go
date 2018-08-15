@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const merge = require('webpack-merge');
@@ -35,6 +35,8 @@ const sassLoader = {
 const scssLoader = [cssLoader, 'postcss-loader', resolveUrlLoader, sassLoader];
 
 module.exports = merge(baseConfig, {
+	devtool: 'cheap-module-source-map',
+	mode: 'production',
 	entry: {
 		bundle: './src/index.jsx',
 		vendor: VENDOR_LIBS,
@@ -48,30 +50,34 @@ module.exports = merge(baseConfig, {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					use: cssLoader,
-				}),
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					cssLoader,
+				],
 			},
 			{
 				test: /\.scss$/,
-				use: ExtractTextPlugin.extract({
-					use: scssLoader,
-					publicPath: '/dist',
-				}),
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					...scssLoader,
+				],
 			},
 		],
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('production'),
-		}),
-		new UglifyJsPlugin({
-			sourceMap: true,
-			uglifyOptions: {
-				compress: {
-					warnings: false,
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin({
+				sourceMap: true,
+				uglifyOptions: {
+					compress: {
+						warnings: false,
+					},
 				},
-			},
-		}),
-	],
+			}),
+		],
+	},
 });

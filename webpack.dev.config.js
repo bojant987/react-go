@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.config.js');
@@ -35,6 +35,8 @@ const sassLoader = {
 const scssLoader = [cssLoader, 'postcss-loader', resolveUrlLoader, sassLoader];
 
 module.exports = merge(baseConfig, {
+	devtool: 'eval-source-map',
+	mode: 'development',
 	entry: {
 		bundle: './src/index.jsx',
 		vendor: VENDOR_LIBS,
@@ -48,25 +50,22 @@ module.exports = merge(baseConfig, {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					use: cssLoader,
-				}),
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					cssLoader,
+				],
 			},
 			{
 				test: /\.scss$/,
-				use: ExtractTextPlugin.extract({
-					use: scssLoader,
-					publicPath: '/',
-				}),
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					...scssLoader,
+				],
 			},
 		],
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('development'),
-		}),
-		new webpack.SourceMapDevToolPlugin({
-			test: /\.js$|.jsx$/,
-		}),
-	],
 });

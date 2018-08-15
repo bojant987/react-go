@@ -5,7 +5,7 @@ Simple React boilerplate to start you up.
 Includes:
 * redux, redux-thunk, react-router
 * smoking hot reloading
-* sass support
+* sass support, css auto prefixing
 * simple express server to serve the project
 * webpack config for dev and prod
 * Jest for testing
@@ -38,7 +38,4 @@ npm start
 Simple function that wraps axios API calls and takes action creators to dispatch on call request, success or error.
 This can be extended with custom auth stuff, like headers, so you don't have to specify them with every API call you make.
 You can use it or delete it.
-
-## TODO
-Switch webpack to v4.
 

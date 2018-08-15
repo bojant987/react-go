@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -27,15 +27,18 @@ module.exports = {
 	},
 	plugins: [
 		new CopyWebpackPlugin([{ from: 'assets/img', to: 'img' }]),
-		new webpack.optimize.CommonsChunkPlugin({
-			names: ['vendor', 'manifest'],
-		}),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
 		}),
-		new ExtractTextPlugin({
-			filename: '[name].[hash].css',
-			allChunks: true,
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+			chunkFilename: '[id].css',
 		}),
 	],
+	optimization: {
+		splitChunks: {
+			name: 'vendor',
+			minChunks: 2,
+		},
+	},
 };
